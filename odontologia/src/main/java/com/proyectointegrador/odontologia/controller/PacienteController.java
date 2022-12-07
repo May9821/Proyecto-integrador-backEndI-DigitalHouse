@@ -1,53 +1,46 @@
 package com.proyectointegrador.odontologia.controller;
 
 
+import com.proyectointegrador.odontologia.dto.request.PacienteDtoReq;
+import com.proyectointegrador.odontologia.dto.response.PacienteDtoRes;
+import com.proyectointegrador.odontologia.entity.Paciente;
+import com.proyectointegrador.odontologia.service.IPacienteService;
+import com.proyectointegrador.odontologia.service.imp.PacienteServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/pacientes")
 public class PacienteController {
 
-    /*private PacienteService pacienteService = new PacienteService(new PacienteDaoH2(new DomicilioDaoH2()));
+    private final IPacienteService pacienteService;
 
-    @PostMapping("/new")
-    public ResponseEntity<Paciente> registrarPaciente(@RequestBody Paciente paciente) {
-
-        return ResponseEntity.ok(pacienteService.guardar(paciente));
-
+    public PacienteController(PacienteServiceImp pacienteService){
+        this.pacienteService = pacienteService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Paciente> buscar(@PathVariable Integer id) {
-        Paciente paciente = pacienteService.buscar(id).orElse(null);
-
-        return ResponseEntity.ok(paciente);
+    @GetMapping("/findAll")
+    public ResponseEntity<List<PacienteDtoRes>> findALlPacientes(){
+        return new ResponseEntity<>(pacienteService.findAllPacientes(),HttpStatus.OK);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<Paciente> actualizar(@RequestBody Paciente paciente) {
-        ResponseEntity<Paciente> response = null;
-
-        if (paciente.getId() != null && pacienteService.buscar(paciente.getId()).isPresent()) {
-            response = ResponseEntity.ok(pacienteService.actualizar(paciente));
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return response;
+    @PostMapping("/crearPaciente")
+    public ResponseEntity<String> crearPaciente(@RequestBody PacienteDtoReq pacienteDtoReq){
+        pacienteService.createPaciente(pacienteDtoReq);
+        return new ResponseEntity<>("Paciente creado con éxito", HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Integer id) {
-        ResponseEntity<String> response = null;
+    @DeleteMapping("/deletePaciente/{id}")
+    public ResponseEntity<String> deletePaciente(@PathVariable Long id){
+        return  new ResponseEntity<>("El paciente se ha eliminado de forma exitosa",HttpStatus.OK);
+    }
 
-        if (pacienteService.buscar(id).isPresent()) {
-            pacienteService.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
 
-        return response;
-    }*/
+
+
+
+
 }

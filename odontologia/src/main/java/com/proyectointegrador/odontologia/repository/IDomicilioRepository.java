@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface IDomicilioRepository extends JpaRepository<Domicilio, Integer> {
+public interface IDomicilioRepository extends JpaRepository<Domicilio, Long> {
 }

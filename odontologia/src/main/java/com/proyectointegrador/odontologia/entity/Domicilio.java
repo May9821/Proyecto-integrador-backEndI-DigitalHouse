@@ -1,37 +1,28 @@
 package com.proyectointegrador.odontologia.entity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 
 @Entity
 @Table
 public class Domicilio {
     @Id
-    @GeneratedValue
-    @Column(name = "id_domicilio")
-    private Integer id;
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String calle;
-    @Column
     private String numero;
-    @Column
     private String localidad;
-    @Column
     private String provincia;
 
-
-    public Domicilio(String calle, String numero, String localidad, String provincia) {
-        this.calle = calle;
-        this.numero = numero;
-        this.localidad = localidad;
-        this.provincia = provincia;
-    }
-
-
+    @OneToOne(mappedBy = "domicilio")
+    private Paciente paciente;
 }

@@ -1,12 +1,13 @@
-package com.proyectointegrador.odontologia.service;
+package com.proyectointegrador.odontologia.service.imp;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proyectointegrador.odontologia.repository.IDomicilioRepository;
 
 
 
-public class DomicilioService {
+public class DomicilioServiceImp {
     private final IDomicilioRepository domicilioRepository;
-
-    public DomicilioService (IDomicilioRepository domicilioRepository){
+    ObjectMapper mapper = new ObjectMapper();
+    public DomicilioServiceImp(IDomicilioRepository domicilioRepository){
         this.domicilioRepository = domicilioRepository;
     }
 

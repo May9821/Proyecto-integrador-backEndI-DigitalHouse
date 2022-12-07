@@ -3,6 +3,8 @@ package com.proyectointegrador.odontologia.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -14,16 +16,15 @@ import javax.persistence.*;
 @Table(name="odontologos")
 public class Odontologo {
     @Id
-    @GeneratedValue
-    @Column(name="odontologo_id")
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column
+    private Long id;
+
     private String nombre;
-    @Column
     private String apellido;
-    @Column
     private Integer matricula;
 
+   @OneToMany(mappedBy = "odontologo", fetch = FetchType.LAZY)
+    private List<Turno> turnos;
 
 }

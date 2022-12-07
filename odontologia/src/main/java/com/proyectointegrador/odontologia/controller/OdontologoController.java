@@ -1,12 +1,15 @@
 package com.proyectointegrador.odontologia.controller;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proyectointegrador.odontologia.dto.request.OdontologoDtoReq;
+import com.proyectointegrador.odontologia.dto.response.OdontologoDtoRes;
 import com.proyectointegrador.odontologia.entity.Odontologo;
 import com.proyectointegrador.odontologia.service.IOdontologoService;
-import com.proyectointegrador.odontologia.service.OdontologoServiceImp;
+import com.proyectointegrador.odontologia.service.imp.OdontologoServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.List;
 
 
@@ -14,64 +17,34 @@ import java.util.List;
 @RequestMapping("/odontologos")
 public class OdontologoController {
     private final IOdontologoService odontologoService ;
+    ObjectMapper mapper = new ObjectMapper();
 
     public OdontologoController(OdontologoServiceImp odontologoService){
         this.odontologoService = odontologoService;
     }
 
     @GetMapping("/findAll")
-    public List<Odontologo> findAllOdontologos(){
-        return odontologoService.findAllOdontologos();
+    public ResponseEntity<List<OdontologoDtoRes>> findAllOdontologos(){
+        return new ResponseEntity<>(odontologoService.findAllOdontologos(),HttpStatus.OK);
     }
 
     @PostMapping("/crearOdontologo")
-    public ResponseEntity<String> crearOdontologo(@RequestBody Odontologo odontologo){
-        odontologoService.createOdontologo(odontologo);
-        return new ResponseEntity<>("odontologo creado con exito", HttpStatus.OK);
+    public ResponseEntity<String> crearOdontologo(@RequestBody OdontologoDtoReq odontologoDtoReq){
+        odontologoService.createOdontologo(odontologoDtoReq);
+        return new ResponseEntity<>("odontologo creado con exito", HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deleteOdontologo/{id}")
-    public ResponseEntity<String> deleteOdontologo(@PathVariable Integer id){
+    public ResponseEntity<String> deleteOdontologo(@PathVariable long id){
         return new ResponseEntity<>(odontologoService.deleteOdontologo(id),HttpStatus.OK);
     }
 
-    /*private OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
-
-    @PostMapping("/new")
-    public ResponseEntity<Odontologo> registrarOdontologo(@RequestBody Odontologo odontologo) {
-        return ResponseEntity.ok(odontologoService.registrarOdontologo(odontologo));
+    @PutMapping("/updateOdontologo/{id}")
+    public ResponseEntity<?> updateOdontologo(@PathVariable Long id, @RequestBody OdontologoDtoReq odontologoDtoReq){
+        odontologoService.updateOdontologo(id,odontologoDtoReq);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<OdontologoDto> buscar(@PathVariable Integer id) {
-        OdontologoDto odontologoDto = odontologoService.buscar(id).orElse(null);
-        return ResponseEntity.ok(odontologoDto);
-    }
 
-    @PutMapping("/update")
-    public ResponseEntity<Odontologo> actualizar(@RequestBody Odontologo odontologo) {
-        ResponseEntity<Odontologo> response = null;
-
-        if (odontologo.getId() != null && odontologoService.buscar(odontologo.getId()).isPresent()) {
-            response = ResponseEntity.ok(odontologoService.actualizar(odontologo));
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-        return response;
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminar(@PathVariable Integer id) {
-        ResponseEntity<String> response = null;
-
-        if (odontologoService.buscar(id).isPresent()) {
-            odontologoService.eliminar(id);
-            response = ResponseEntity.status(HttpStatus.NO_CONTENT).body("Eliminado");
-        } else {
-            response = ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
-
-        return response;
-    }*/
 
 }

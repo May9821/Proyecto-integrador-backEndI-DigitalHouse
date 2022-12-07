@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -15,30 +16,31 @@ import java.util.Date;
 @Setter
 
 @Entity
-@Table
+@Table(name="pacientes")
 public class Paciente {
     @Id
-    @GeneratedValue
-    @Column
-    private Integer id;
-    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
-    @Column
     private String apellido;
-    @Column
     private String dni;
-    @Column
     private Date fechaIngreso;
-//    private Domicilio domicilio;
 
-    public Paciente(String nombre, String apellido, String dni, Date fechaIngreso/*, Domicilio domicilio*/) {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "domicilio_id", referencedColumnName = "id")
+    private Domicilio domicilio;
+
+    @OneToMany(mappedBy = "paciente", fetch = FetchType.LAZY)
+    private List<Turno> turnos;
+
+    /*public Paciente(String nombre, String apellido, String dni, Date fechaIngreso*//*, Domicilio domicilio*//*) {
 
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
         this.fechaIngreso = fechaIngreso;
 //        this.domicilio = domicilio;
-    }
+    }*/
 
 
 
