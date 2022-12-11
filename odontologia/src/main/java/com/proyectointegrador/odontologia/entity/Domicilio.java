@@ -1,5 +1,6 @@
 package com.proyectointegrador.odontologia.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -24,5 +25,6 @@ public class Domicilio {
     private String provincia;
 
     @OneToOne(mappedBy = "domicilio")
+    @JsonIgnore
     private Paciente paciente;
 }

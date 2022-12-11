@@ -1,5 +1,6 @@
 package com.proyectointegrador.odontologia.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,6 +26,6 @@ public class Odontologo {
     private Integer matricula;
 
    @OneToMany(mappedBy = "odontologo", fetch = FetchType.LAZY)
-    private List<Turno> turnos;
+   private List<Turno> turnos;
 
 }

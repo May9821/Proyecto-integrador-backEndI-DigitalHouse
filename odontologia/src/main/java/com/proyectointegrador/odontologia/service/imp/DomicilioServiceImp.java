@@ -1,9 +1,10 @@
 package com.proyectointegrador.odontologia.service.imp;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.proyectointegrador.odontologia.repository.IDomicilioRepository;
+import org.springframework.stereotype.Service;
 
 
-
+@Service
 public class DomicilioServiceImp {
     private final IDomicilioRepository domicilioRepository;
     ObjectMapper mapper = new ObjectMapper();

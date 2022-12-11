@@ -1,6 +1,7 @@
 package com.proyectointegrador.odontologia.controller;
 
 
+import com.proyectointegrador.odontologia.dto.PacienteDto;
 import com.proyectointegrador.odontologia.dto.request.PacienteDtoReq;
 import com.proyectointegrador.odontologia.dto.response.PacienteDtoRes;
 import com.proyectointegrador.odontologia.entity.Paciente;
@@ -23,19 +24,24 @@ public class PacienteController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<PacienteDtoRes>> findALlPacientes(){
+    public ResponseEntity<List<PacienteDto>> findALlPacientes(){
         return new ResponseEntity<>(pacienteService.findAllPacientes(),HttpStatus.OK);
     }
 
     @PostMapping("/crearPaciente")
-    public ResponseEntity<String> crearPaciente(@RequestBody PacienteDtoReq pacienteDtoReq){
-        pacienteService.createPaciente(pacienteDtoReq);
-        return new ResponseEntity<>("Paciente creado con éxito", HttpStatus.CREATED);
+    public ResponseEntity<PacienteDtoRes> crearPaciente(@RequestBody PacienteDtoReq pacienteDtoReq){
+        return new ResponseEntity<>(pacienteService.createPaciente(pacienteDtoReq), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/updatePaciente")
+    public ResponseEntity<?> updatePaciente (@RequestBody PacienteDtoReq pacienteDtoReq){
+        pacienteService.updatePaciente(pacienteDtoReq);
+        return ResponseEntity.ok(HttpStatus.OK);
     }
 
     @DeleteMapping("/deletePaciente/{id}")
     public ResponseEntity<String> deletePaciente(@PathVariable Long id){
-        return  new ResponseEntity<>("El paciente se ha eliminado de forma exitosa",HttpStatus.OK);
+        return  new ResponseEntity<>(pacienteService.deletePaciente(id),HttpStatus.OK);
     }
 
 

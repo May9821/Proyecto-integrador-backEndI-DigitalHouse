@@ -1,5 +1,6 @@
 package com.proyectointegrador.odontologia.service;
 
+import com.proyectointegrador.odontologia.dto.OdontologoDto;
 import com.proyectointegrador.odontologia.dto.request.OdontologoDtoReq;
 import com.proyectointegrador.odontologia.dto.response.OdontologoDtoRes;
 import com.proyectointegrador.odontologia.entity.Odontologo;
@@ -7,9 +8,9 @@ import com.proyectointegrador.odontologia.entity.Odontologo;
 import java.util.List;
 
 public interface IOdontologoService {
-    List<OdontologoDtoRes> findAllOdontologos();
-    Odontologo findOdontologoById(Long id);
-    Odontologo createOdontologo(OdontologoDtoReq newOdontologo);
+    List<OdontologoDto> findAllOdontologos();
+    OdontologoDto findOdontologoById(Long id);
+    OdontologoDtoRes createOdontologo(OdontologoDtoReq newOdontologo);
+    String updateOdontologo(OdontologoDtoReq odontologo);
     String deleteOdontologo(Long id);
-    OdontologoDtoRes updateOdontologo(Long id,OdontologoDtoReq odontologo);
 }

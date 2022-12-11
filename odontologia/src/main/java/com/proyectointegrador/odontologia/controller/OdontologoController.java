@@ -1,5 +1,6 @@
 package com.proyectointegrador.odontologia.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.proyectointegrador.odontologia.dto.OdontologoDto;
 import com.proyectointegrador.odontologia.dto.request.OdontologoDtoReq;
 import com.proyectointegrador.odontologia.dto.response.OdontologoDtoRes;
 import com.proyectointegrador.odontologia.entity.Odontologo;
@@ -24,14 +25,18 @@ public class OdontologoController {
     }
 
     @GetMapping("/findAll")
-    public ResponseEntity<List<OdontologoDtoRes>> findAllOdontologos(){
+    public ResponseEntity<List<OdontologoDto>> findAllOdontologos(){
         return new ResponseEntity<>(odontologoService.findAllOdontologos(),HttpStatus.OK);
     }
 
+    @GetMapping("/findById/{id}")
+    public ResponseEntity<OdontologoDto> encontrarOndontologoPorId(@PathVariable Long id){
+        return new ResponseEntity<>(odontologoService.findOdontologoById(id),HttpStatus.OK);
+    }
+
     @PostMapping("/crearOdontologo")
-    public ResponseEntity<String> crearOdontologo(@RequestBody OdontologoDtoReq odontologoDtoReq){
-        odontologoService.createOdontologo(odontologoDtoReq);
-        return new ResponseEntity<>("odontologo creado con exito", HttpStatus.CREATED);
+    public ResponseEntity<OdontologoDtoRes> crearOdontologo(@RequestBody OdontologoDtoReq odontologoDtoReq){
+        return new ResponseEntity<>(odontologoService.createOdontologo(odontologoDtoReq), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deleteOdontologo/{id}")
@@ -40,8 +45,8 @@ public class OdontologoController {
     }
 
     @PutMapping("/updateOdontologo/{id}")
-    public ResponseEntity<?> updateOdontologo(@PathVariable Long id, @RequestBody OdontologoDtoReq odontologoDtoReq){
-        odontologoService.updateOdontologo(id,odontologoDtoReq);
+    public ResponseEntity<?> updateOdontologo(@RequestBody OdontologoDtoReq odontologoDtoReq){
+        odontologoService.updateOdontologo(odontologoDtoReq);
         return ResponseEntity.ok(HttpStatus.OK);
     }
 

@@ -2,6 +2,8 @@ package com.proyectointegrador.odontologia.service.imp;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.proyectointegrador.odontologia.dto.OdontologoDto;
+import com.proyectointegrador.odontologia.dto.PacienteDto;
 import com.proyectointegrador.odontologia.dto.request.PacienteDtoReq;
 import com.proyectointegrador.odontologia.dto.response.PacienteDtoRes;
 import com.proyectointegrador.odontologia.entity.Paciente;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PacienteServiceImp implements IPacienteService {
@@ -23,13 +26,12 @@ public class PacienteServiceImp implements IPacienteService {
     }
 
     @Override
-    public List<PacienteDtoRes> findAllPacientes() {
+    public List<PacienteDto> findAllPacientes() {
         List<Paciente>  listaPacientes = pacienteRepository.findAll();
-        List<PacienteDtoRes> pacienteDtoResList = new ArrayList<>();
-        for (Paciente paciente: listaPacientes ) {
-            pacienteDtoResList.add(mapper.convertValue(paciente, PacienteDtoRes.class));
-        }
-        return pacienteDtoResList;
+        List<PacienteDto> pacienteDto = listaPacientes.stream()
+                .map(odontologo -> mapper.convertValue(odontologo, PacienteDto.class))
+                .collect(Collectors.toList());
+        return pacienteDto;
     }
 
     @Override
@@ -38,12 +40,14 @@ public class PacienteServiceImp implements IPacienteService {
     }
 
     @Override
-    public Paciente createPaciente(PacienteDtoReq pacienteDtoReq) {
+    public PacienteDtoRes createPaciente(PacienteDtoReq pacienteDtoReq) {
         Paciente paciente = mapper.convertValue(pacienteDtoReq, Paciente.class);
-        if (paciente != null){
-            return pacienteRepository.save(paciente);
-        }
-        return new Paciente();
+        pacienteRepository.save(paciente);
+
+        PacienteDtoRes respuesta = new PacienteDtoRes();
+        respuesta.setPaciente(paciente);
+        respuesta.setMensaje("Paciente creado exitosamente con id "+paciente.getId());
+        return respuesta;
     }
 
     @Override
@@ -56,31 +60,9 @@ public class PacienteServiceImp implements IPacienteService {
     }
 
     @Override
-    public String updatePaciente(Paciente paciente) {
-        return null;
+    public String updatePaciente(PacienteDtoReq pacienteDtoReq) {
+        Paciente paciente = mapper.convertValue(pacienteDtoReq, Paciente.class);
+        pacienteRepository.save(paciente);
+        return "Paciente actualizado";
     }
-
-
-
-
-    /*public Paciente guardar(Paciente p) {
-        p.setFechaIngreso(new Date());
-        return pacienteIDao.guardar(p);
-    }
-
-    public Optional<Paciente> buscar(Integer id) {
-        return pacienteIDao.buscar(id);
-    }
-
-    public List<Paciente> buscarTodos() {
-        return pacienteIDao.buscarTodos();
-    }
-
-    public void eliminar(Integer id) {
-        pacienteIDao.eliminar(id);
-    }
-
-    public Paciente actualizar(Paciente p) {
-        return pacienteIDao.actualizar(p);
-    }*/
 }

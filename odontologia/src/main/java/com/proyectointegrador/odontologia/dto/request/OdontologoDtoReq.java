@@ -12,6 +12,7 @@ import javax.persistence.Column;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OdontologoDtoReq {
+    private Long id;
     private String nombre;
     private String apellido;
     private Integer matricula;

@@ -1,5 +1,8 @@
 package com.proyectointegrador.odontologia.dto.response;
 
+import com.proyectointegrador.odontologia.dto.OdontologoDto;
+import com.proyectointegrador.odontologia.dto.request.OdontologoDtoReq;
+import com.proyectointegrador.odontologia.entity.Odontologo;
 import com.proyectointegrador.odontologia.entity.Turno;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,9 +18,6 @@ import java.util.List;
 @Setter
 public class OdontologoDtoRes {
 
-    private Long id;
-    private String nombre;
-    private String apellido;
-    private Integer matricula;
-    private List<Turno> turnos;
+    private OdontologoDto odontologo;
+    private String mensaje;
 }
