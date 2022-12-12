@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -26,6 +25,7 @@ public class Odontologo {
     private Integer matricula;
 
    @OneToMany(mappedBy = "odontologo", fetch = FetchType.LAZY)
+   @JsonIgnore
    private List<Turno> turnos;
 
 }

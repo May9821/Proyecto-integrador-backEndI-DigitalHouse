@@ -1,5 +1,7 @@
 package com.proyectointegrador.odontologia.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -7,9 +9,9 @@ import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Getter
 @Setter
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name= "turnos")
 public class Turno {
@@ -20,13 +22,15 @@ public class Turno {
 
    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    @JoinColumn(name = "paciente_id")
+//   @JsonIgnore
    private Paciente paciente;
 
-     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "odontologo_id")
-    private Odontologo odontologo;
+   @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @JoinColumn(name = "odontologo_id")
+//   @JsonIgnore
+   private Odontologo odontologo;
 
-    private Date fecha;
+   private Date fecha;
 
 
 }
