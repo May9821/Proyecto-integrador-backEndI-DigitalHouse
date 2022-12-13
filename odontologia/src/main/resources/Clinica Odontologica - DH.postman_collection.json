@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "f0d0fdf2-39d6-49e8-a9f3-a754a45e1218",
+		"name": "Clinica Odontologica - DH",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Odontologo CRUD",
+			"item": [
+				{
+					"name": "Obtener todos los odontologos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/odontologos/findAll",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"odontologos",
+								"findAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar odontologo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/odontologos/deleteOdontologo/10",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"odontologos",
+								"deleteOdontologo",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar info odontologo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"nombreactualizado\",\r\n    \"apellido\": \"apellidoactualizado\",\r\n    \"matricula\": 123466\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/odontologos/updateOdontologo/2",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"odontologos",
+								"updateOdontologo",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear odontologo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"jose\",\r\n    \"apellido\": \"campo\",\r\n    \"matricula\": 123456\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/odontologos/crearOdontologo",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"odontologos",
+								"crearOdontologo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener odontologo por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/odontologos/findById/2",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"odontologos",
+								"findById",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Paciente CRUD",
+			"item": [
+				{
+					"name": "Obtener todos los pacientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/pacientes/findAll",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"pacientes",
+								"findAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Paciente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\" : \"Mayra\",\r\n    \"apellido\" : \"Torres\",\r\n    \"dni\" : \"123456\",\r\n    \"fechaIngreso\" : \"2022-09-21\",\r\n    \"domicilio\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/pacientes/crearPaciente",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"pacientes",
+								"crearPaciente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar paciente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/pacientes/deletePaciente/6",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"pacientes",
+								"deletePaciente",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar paciente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/pacientes/deletePaciente/1",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"pacientes",
+								"deletePaciente",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OBtener paciente por ID",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Turnos",
+			"item": [
+				{
+					"name": "Obtener todos los turnos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/turnos/findAll",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"turnos",
+								"findAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear turno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"paciente\": {\r\n        \"nombre\": \"turnoCreado\",\r\n        \"apellido\": \"turnoCreado\",\r\n        \"dni\": \"turnoCreado\",\r\n        \"fechaIngreso\": \"turnoCreado\",\r\n        \"domicilio\": {\r\n            \"calle\": \"sfdga\",\r\n            \"numero\": \"dfgdf\",\r\n            \"localidad\": \"fbdstb\",\r\n            \"provincia\": \"dartgbdsf\"\r\n        },\r\n        \"odontologo\": {\r\n            \"nombre\": \"jose\",\r\n            \"apellido\": \"campo\",\r\n            \"matricula\": 123456\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api-url}}/turnos/crearTurno",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"turnos",
+								"crearTurno"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar turno",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/turnos/findAllTurnos",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"turnos",
+								"findAllTurnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Borrar turno",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{api-url}}/turnos/findAllTurnos",
+							"host": [
+								"{{api-url}}"
+							],
+							"path": [
+								"turnos",
+								"findAllTurnos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Security",
+			"item": [
+				{
+					"name": "User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "ADMIN",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
