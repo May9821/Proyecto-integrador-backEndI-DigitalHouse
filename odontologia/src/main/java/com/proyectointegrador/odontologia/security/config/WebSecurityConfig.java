@@ -2,6 +2,7 @@ package com.proyectointegrador.odontologia.security.config;
 
 import com.proyectointegrador.odontologia.security.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -25,10 +26,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers()
+                .antMatchers("/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated().and()
+                .headers().frameOptions().sameOrigin().and()
                 .formLogin();
     }
 
